@@ -14,6 +14,11 @@ import Datatable from './components/datatable/Datatable';
 import User from "./pages/User/User"
 import Hotel from "./pages/Hotel/Hotel.jsx"
 import Rooms from "./pages/Rooms/Rooms";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Edit from "./pages/Edit/Edit";
+import Addrooms from "./pages/AddRooms/Addrooms";
+import BookedRooms from "./pages/BookedRooms/BookedRooms";
+// import New from "./pages/new/New";
 
 
 
@@ -41,9 +46,11 @@ function App() {
           <Route path="/user" element={<User/>}/>
           <Route path="/hotel" element={<Hotel/>}/>
           <Route path="/rooms" element={<Rooms/>}/>
-          
-        
-
+          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/add" element={<New/>}/>
+          <Route path="/edit/:id" element={<Edit/>}/>
+          <Route path="/addrooms" element={<Addrooms/>}/>
+          <Route path="/bookedroom" element={<BookedRooms/>}/>
         </Routes>
 
       </BrowserRouter>

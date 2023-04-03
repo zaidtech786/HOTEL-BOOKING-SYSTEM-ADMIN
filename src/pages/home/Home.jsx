@@ -10,6 +10,10 @@ import { useContext } from 'react';
 import { AppContext } from "../../context/AuthContext";
 import Hotel from "../Hotel/Hotel";
 import Rooms from "../Rooms/Rooms";
+import Dashboard from "../Dashboard/Dashboard";
+import Addrooms from "../AddRooms/Addrooms";
+import BookedRooms from "../BookedRooms/BookedRooms";
+import New from "../new/New";
 
 const Home = () => {
   const {icon} = useContext(AppContext)
@@ -33,14 +37,23 @@ const Home = () => {
             ?
             <Rooms/>
             :
-            <>NO Route Selected</>
+            icon==="addrooms"
+            ?
+            <Addrooms/>
+            :
+            icon==="bookedroom"
+            ?
+            <BookedRooms/>
+            :
+            icon ==="addhotel"
+            ?
+            <New/>
+            :
+           <Dashboard/>
 
            }
         </div>
-        {/* <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div> */}
+      
         {/* <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
           <Table />

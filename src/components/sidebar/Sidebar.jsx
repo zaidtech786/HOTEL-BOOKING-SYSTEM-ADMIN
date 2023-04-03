@@ -11,7 +11,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 // import { AppContext } from './../../../../frontend/src/context/AuthContext';
@@ -19,7 +19,8 @@ import { AppContext } from './../../context/AuthContext';
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
-  const {setIcon} = useContext(AppContext)
+  const {setIcon} = useContext(AppContext);
+  const navigate = useNavigate()
   return (
     <div className="sidebar">
       <div className="top">
@@ -60,10 +61,10 @@ const Sidebar = () => {
 
           <li onClick={()=>setIcon("addrooms")}>
             {/* <LocalShippingIcon className="icon" /> */}
-            <span>Add Rooms</span>
+            <span >Add Rooms</span>
           </li>
           <p className="title">USEFUL</p>
-          <li onClick={()=>setIcon("bookings")}>
+          <li onClick={()=>setIcon("bookedroom")}>
             <InsertChartIcon className="icon" />
             <span>Bookings</span>
           </li>
