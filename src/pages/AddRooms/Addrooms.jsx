@@ -11,7 +11,6 @@ const Addrooms = () => {
   const [info, setInfo] = useState({});
   const [files, setFiles] = useState([]);
   const [hotels,setHotels] = useState([]);
-  const [hotelName,setHotelName] = useState("");
 
 
   const [roomInfo, setRoomInfo] = useState({
@@ -47,43 +46,22 @@ useEffect( () => {
 const handleClick = async (e) => {
     e.preventDefault()
       console.log(roomInfo)
-    // console.log(file)
-    // console.log("HotelInfo :", hotelInfo);
-    // e.preventDefault();
-
-    // try {
-    //   const imgList = await Promise.all(
-    //     Object.values(file).map(async (f) => {
-    //       const data = new FormData();
-    //       data.append("file", f);
-    //       data.append("upload_preset", "Zaid-Bolte-Chote");
-    //       data.append("cloud_name", "zaidsiddiqui");
-    //       const res = await fetch(
-    //         "https://api.cloudinary.com/v1_1/zaidsiddiqui/image/upload",
-    //         {
-    //           method: "post",
-    //           body: data,
-    //         }
-    //       );
-    //       const datas = await res.json();
-    //       const { url } = datas;
-    //       return url;
-    //       //  setFiles(datas.url)
-    //     })
-    //   );
-    //   // console.log("files",imgList)
-    //   //  Posting Data to database
-    //   axios
-    //     .post("http://localhost:5000/hotel/addhotel", {
-    //       ...hotelInfo,
-    //       photos: imgList,
-    //     })
-    //     .then((res) => {
-    //       console.log("REs:", res.data);
-    //     });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {                                      
+      const {title,maxPeople,price,desc,roomNumbers} = roomInfo
+      axios
+        .post(`http://localhost:5000/room/addrooms/${roomInfo.hotelName}`, {
+          title,
+          maxPeople,
+          price,
+          desc,
+          roomNumbers
+        })
+        .then((res) => {
+          console.log("REs:", res.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   console.log(info);
@@ -98,16 +76,6 @@ const handleClick = async (e) => {
         <div className="bottom">
           <div className="right">
             <form>
-              {/* <div className="formInput">
-                <label>Hotel Name</label>
-                <input
-                  onChange={handleChange}
-                  type="text"
-                  name="hotelName"
-                
-                  placeholder="Enter Hotel Name"
-                />
-              </div> */}
               <div className="formInput">
                 <label>Title</label>
                 <input
