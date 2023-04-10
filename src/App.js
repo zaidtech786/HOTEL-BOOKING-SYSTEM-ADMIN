@@ -18,6 +18,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Edit from "./pages/Edit/Edit";
 import Addrooms from "./pages/AddRooms/Addrooms";
 import BookedRooms from "./pages/BookedRooms/BookedRooms";
+import EditRoom from "./pages/EditRoom/EditRoom";
 // import New from "./pages/new/New";
 
 
@@ -49,8 +50,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/add" element={<New/>}/>
           <Route path="/edit/:id" element={<Edit/>}/>
-          <Route path="/addrooms" element={<Addrooms/>}/>
+          <Route path="/addrooms/:id" element={<Addrooms/>}/>
           <Route path="/bookedroom" element={<BookedRooms/>}/>
+          <Route path="/editroom/:id" element={<EditRoom/>}/>
         </Routes>
 
       </BrowserRouter>

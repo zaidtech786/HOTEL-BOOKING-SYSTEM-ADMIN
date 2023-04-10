@@ -31,13 +31,14 @@
       }
 
       .right {
-        flex: 2;
+     
 
         form {
           display: flex;
           flex-wrap: wrap;
           gap: 30px;
-          justify-content: space-around;
+          // justify-content: space-around;
+        
 
           .formInput {
             width: 40%;
@@ -61,13 +62,14 @@
           }
 
           button {
-            width: 250px;
+            width: 300px;
             padding: 10px;
             border: none;
             background-color: teal;
             color: white;
             font-weight: bold;
             cursor: pointer;
+            justify-self: center;
             margin-top: 10px;
             // float: left;
           }

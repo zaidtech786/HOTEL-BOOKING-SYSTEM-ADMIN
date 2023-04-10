@@ -18,7 +18,7 @@ const Edit = () => {
     axios.get(`http://localhost:5000/hotel/gethotel/${id}`)
     .then(res => {
       console.log("Single Hotel Data :",res.data.hotels)
-      setData(res.data.hotels)
+      setHotelInfo(res.data.hotels)
     }).catch(err => {
       console.log(err)
     })
@@ -46,44 +46,20 @@ const Edit = () => {
   };
 
   const handleClick = async (e) => {
-    // console.log(file)
-    console.log("HotelInfo :", hotelInfo);
-    e.preventDefault();
-
-    try {
-      const imgList = await Promise.all(
-        Object.values(file).map(async (f) => {
-          const data = new FormData();
-          data.append("file", f);
-          data.append("upload_preset", "Zaid-Bolte-Chote");
-          data.append("cloud_name", "zaidsiddiqui");
-          const res = await fetch(
-            "https://api.cloudinary.com/v1_1/zaidsiddiqui/image/upload",
-            {
-              method: "post",
-              body: data,
-            }
-          );
-          const datas = await res.json();
-          const { url } = datas;
-          return url;
-          //  setFiles(datas.url)
-        })
-      );
-      // console.log("files",imgList)
-      //  Posting Data to database
-      axios
-        .post("http://localhost:5000/hotel/addhotel", {
-          ...hotelInfo,
-          photos: imgList,
-        })
-        .then((res) => {
-          console.log("REs:", res.data);
-        });
-    } catch (err) {
-      console.log(err);
-    }
+  
+      e.preventDefault()
+      console.log(id)
+      axios.put(`http://localhost:5000/hotel/updatehotel/${id}`,{
+        ...hotelInfo
+      })
+      .then(res => {
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err)
+      })
   };
+
+
   return (
     <div className="new">
     <Sidebar />
@@ -93,18 +69,7 @@ const Edit = () => {
         <h1>title</h1>
       </div>
       <div className="bottom">
-        <div className="left">
-          {files.map((file) => {
-            return (
-              <>
-                <img
-                  src={file}
-                  alt=""
-                />
-              </>
-            );
-          })}
-        </div>
+      
         <div className="right">
           <form>
             <div className="formInput">
@@ -126,7 +91,7 @@ const Edit = () => {
                 onChange={handleChange}
                 type="text"
                 name="name"
-                value={data?.name}
+                value={hotelInfo?.name}
                 placeholder="Enter Hotel Name"
               />
             </div>
@@ -135,7 +100,7 @@ const Edit = () => {
               <input
                 onChange={handleChange}
                 type="text"
-                value={data?.type}
+                value={hotelInfo?.type}
                 name="type"
                 placeholder="Enter type"
               />
@@ -146,7 +111,7 @@ const Edit = () => {
                 onChange={handleChange}
                 type="text"
                 name="city"
-                value={data?.city}
+                value={hotelInfo?.city}
                 placeholder="City"
               />
             </div>
@@ -156,17 +121,17 @@ const Edit = () => {
                 onChange={handleChange}
                 type="text"
                 name="address"
-                value={data?.address}
+                value={hotelInfo?.address}
                 placeholder="Enter Address"
               />
             </div>
-            <div className="formInput">
+            <div className="formInput"> 
               <label>Distance</label>
               <input
                 onChange={handleChange}
                 type="text"
                 name="distance"
-                value={data?.distance}
+                value={hotelInfo?.distance}
                 placeholder="Enter Distance"
               />
             </div>
@@ -176,7 +141,7 @@ const Edit = () => {
                 onChange={handleChange}
                 type="text"
                 name="title"
-                value={data?.title}
+                value={hotelInfo?.title}
                 placeholder="Enter Hotel Title"
               />
             </div>
@@ -186,7 +151,7 @@ const Edit = () => {
                 onChange={handleChange}
                 type="text"
                 name="desc"
-                value={data?.desc}
+                value={hotelInfo?.desc}
                 placeholder="Enter Description"
               />
             </div>
@@ -203,12 +168,12 @@ const Edit = () => {
                 onChange={handleChange}
                 type="Number"
                 name="price"
-                value={data?.price}
+                value={hotelInfo?.price}
                 placeholder="Enter Price"
               />
             </div>
 
-            <button onClick={handleClick}>{data?._id? "Edit": "Submit"}</button>
+            <button onClick={handleClick}>Edit</button>
           </form>
         </div>
       </div>

@@ -2,14 +2,16 @@ import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { AppContext } from "../../context/AuthContext";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState();
   const [info, setInfo] = useState({});
   const [files, setFiles] = useState([]);
+  const {setIcon} = useContext(AppContext)
 
   const [hotelInfo, setHotelInfo] = useState({
     name: "",
@@ -62,6 +64,7 @@ const New = ({ inputs, title }) => {
         })
         .then((res) => {
           console.log("REs:", res.data);
+          setIcon("rooms")
         });
     } catch (err) {
       console.log(err);

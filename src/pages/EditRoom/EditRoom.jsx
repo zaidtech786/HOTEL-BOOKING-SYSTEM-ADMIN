@@ -6,17 +6,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Addrooms = () => {
-  const [info, setInfo] = useState({});
+const EditRoom = () => {
+    const [info, setInfo] = useState({});
   const [hotels,setHotels] = useState([]);
+  const {id} = useParams()
 
 
   const [roomInfo, setRoomInfo] = useState({
     title: "",
     maxPeople:"",
+    price: "",
     hotelName:"",
     desc:"",
-    roomNumbers:""
+    roomNumbers:[""]
   });
   const navigate = useNavigate();
 
@@ -25,47 +27,55 @@ const Addrooms = () => {
     setRoomInfo({ ...roomInfo, [e.target.name]: e.target.value });
 };
 
-   
-const getHotelData = () => {
-  axios.get("http://localhost:5000/hotel/gethotels")
-  .then(res => {
-    console.log(res.data);
-    setHotels(res.data.hotels)
-  }).catch(err => {
-    console.log(err)
-  })
-}
-useEffect( () => {
-    getHotelData()
-},[])
-
-
-const handleClick = async (e) => {
-    e.preventDefault()
-      console.log(roomInfo)
-    try {                                      
-      const {title,maxPeople,desc,roomNumbers} = roomInfo 
-      axios
-        .post(`http://localhost:5000/room/addrooms/${roomInfo.hotelName}`, {
-          title,
-          maxPeople,
-          desc,
-          roomNumbers
-        })
-        .then((res) => {
-          console.log("REs:", res.data);
-        });
-    } catch (err) {
-      console.log(err);
+ const getHotelData = () => {
+      axios.get("http://localhost:5000/hotel/gethotels")
+      .then(res => {
+        console.log(res.data);
+       
+        setHotels(res.data.hotels)
+      }).catch(err => {
+        console.log(err)
+      })
     }
-  };
+    useEffect( () => {
+        getHotelData()
+    },[])
 
-  console.log(info);
+
+   
+const singleRoomData = () => {
+    axios.get(`http://localhost:5000/room/getroombyid/${id}`)
+    .then(res => {
+      console.log("Single Hotel Data :",res.data)
+      setRoomInfo(res.data.Rooms)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  useEffect( () => {
+    singleRoomData()
+  },[]);
+
+  const EditData = (e) => {
+    e.preventDefault()
+        axios.put(`http://localhost:5000/room/updateroom/${id}`,{
+          ...roomInfo
+        })
+        .then(res => {
+          console.log(res.data)
+        }).catch(err => {
+          console.log(err)
+        })
+    
+  
+  }
+
   return (
     <div className="new">
-      {/* <Sidebar /> */}
+      <Sidebar />
       <div className="newContainer">
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="top">
           <h1>title</h1>
         </div>
@@ -78,6 +88,7 @@ const handleClick = async (e) => {
                   onChange={handleChange}
                   type="text"
                   name="title"
+                  value={roomInfo.title}
                   placeholder="Enter Title"
                 />
               </div>
@@ -87,10 +98,20 @@ const handleClick = async (e) => {
                   onChange={handleChange}
                   type="text"
                   name="maxPeople"
+                  value={roomInfo.maxPeople}
                   placeholder="max People"
                 />
               </div>
-              
+              <div className="formInput">
+                <label>Price</label>
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  name="price"
+                  value={roomInfo.price}
+                  placeholder="Enter Price"
+                />
+              </div>
           
               <div className="formInput">
                 <label>Description</label>
@@ -98,6 +119,7 @@ const handleClick = async (e) => {
                   onChange={handleChange}
                   type="text"
                   name="desc"
+                  value={roomInfo.desc}
                   placeholder="Enter Description"
                 />
               </div>
@@ -107,6 +129,7 @@ const handleClick = async (e) => {
                   onChange={handleChange}
                   type="text"
                   name="roomNumbers"
+                  value={roomInfo.roomNumbers}
                   placeholder="Enter RoomNumbers"
                 />
               </div>
@@ -117,7 +140,6 @@ const handleClick = async (e) => {
                     {hotels.map(hotel => {
                         return(
                             <>
-                           
                         <option value={hotel._id} >{hotel.name} </option>
                             </>
                         )
@@ -126,8 +148,8 @@ const handleClick = async (e) => {
                 </select>
               </div>
 
-             <div style={{}}>
-              <button onClick={handleClick}> Submit</button>
+             <div >
+              <button onClick={EditData}> Edit</button>
              </div>
 
             </form>
@@ -135,9 +157,7 @@ const handleClick = async (e) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Addrooms;
-
-
+export default EditRoom

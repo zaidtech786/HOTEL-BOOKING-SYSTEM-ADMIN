@@ -25,13 +25,17 @@ const Hotel = () => {
     },[])
 
     const deleteHotel = (id) => {
-      axios.delete(`http://localhost:5000/hotel/removehote/${id}`)
+      axios.delete(`http://localhost:5000/hotel/removehotel/${id}`)
       .then(res => {
         console.log(res.data)
       })
       .catch(err => {
         console.log(err)
-      })
+      });
+      const filterData = hotels.filter(hotel => {
+        return hotel._id!==id
+      });
+      setHotels(filterData)
     }
     return (
       <>

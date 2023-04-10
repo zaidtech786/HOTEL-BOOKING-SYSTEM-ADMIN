@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Rooms = () => {
     const [rooms,setRooms] = useState([]);
+    const navigate = useNavigate()
     const getRoomsData = () => {
       axios.get("http://localhost:5000/room/getrooms")
       .then(res => {
@@ -16,7 +18,21 @@ const Rooms = () => {
     useEffect( () => {
         getRoomsData()
     },[])
-      // const [user,setUser] = use
+    
+    const deleteRoom = (id) => {
+      axios.delete(`http://localhost:5000/room/removerooms/${id}`)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      });
+      const filterData = rooms.filter(room => {
+        return room._id!==id
+      });
+      setRooms(filterData)
+    }
+
     return (
       <>
       <h1 style={{textAlign:"center"}}>Rooms List</h1>
@@ -29,7 +45,7 @@ const Rooms = () => {
         <th scope="col">MAx People</th>
         <th scope="col">Descriptions</th>
         <th scope="col">Room Number</th>
-        {/* <th scope="col">IsFeatured</th> */}
+        <th scope="col">Operations</th>
       </tr>
     </thead>
     <tbody>
@@ -45,7 +61,10 @@ const Rooms = () => {
         <td>{maxPeople}</td>
         <td>{desc}</td>
         <td>{roomNumbers}</td>
-        {/* <td>{isFeatured}</td> */}
+        <td>
+        <button style={{marginRight:"10px"}} onClick={()=>navigate(`/editroom/${room._id}`)}>Edit</button>
+        <button onClick={() => deleteRoom(room._id)}>Delete</button>
+        </td>
       </tr>
           </>
         )
