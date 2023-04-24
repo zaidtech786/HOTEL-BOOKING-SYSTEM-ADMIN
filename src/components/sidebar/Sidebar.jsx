@@ -68,23 +68,7 @@ const Sidebar = () => {
             <InsertChartIcon className="icon" />
             <span>Bookings</span>
           </li>
-          {/* <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
-          </li>
-          <p className="title">SERVICE</p>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
-          </li>
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li> */}
+     
           <p className="title">USER</p>
           <li onClick={()=>setIcon("profile")}>
             <AccountCircleOutlinedIcon className="icon" />

@@ -69,7 +69,7 @@ const BookedRooms = () => {
      <td>{moment(room.checkOut).utc().format('DD-MM-YYYY')}</td>
      <td>
 
-     <button onClick={() => checkOutUser(room.room._id,room._id)}>CheckOut User</button>
+     <button style={{marginRight:"10px",padding:"0.3rem 1rem",outline:"none",borderRadius:"5px",border:"none",backgroundColor:"#16a085",fontWeight:"600"}} onClick={() => checkOutUser(room.room._id,room._id)}>CheckOut User</button>
      </td>
 
       

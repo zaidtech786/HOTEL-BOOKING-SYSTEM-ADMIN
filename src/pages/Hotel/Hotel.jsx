@@ -69,8 +69,10 @@ const Hotel = () => {
         <td>{address}</td>
         <td>{title}</td>
         <td>
-          <button style={{marginRight:"10px"}} onClick={() => navigate(`/edit/${hotel._id}`)}>Edit</button>
-          <button onClick={() => deleteHotel(hotel._id)}>Delete</button>
+          <div style={{display:"flex"}}>
+          <button style={{marginRight:"10px",padding:"0.3rem 1rem",outline:"none",borderRadius:"5px",border:"none",backgroundColor:"#16a085",fontWeight:"600"}}  onClick={() => navigate(`/edit/${hotel._id}`)}>Edit</button>
+          <button style={{padding:"0.3rem 1rem",outline:"none",borderRadius:"5px",border:"none",backgroundColor:"#c0392b",fontWeight:"600"}}  onClick={() => deleteHotel(hotel._id)}>Delete</button>
+          </div>
         </td>
       </tr>
           </>

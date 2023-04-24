@@ -19,6 +19,7 @@ import Edit from "./pages/Edit/Edit";
 import Addrooms from "./pages/AddRooms/Addrooms";
 import BookedRooms from "./pages/BookedRooms/BookedRooms";
 import EditRoom from "./pages/EditRoom/EditRoom";
+import Profile from "./pages/Profile/Profile";
 // import New from "./pages/new/New";
 
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/new" element={<New/>}/>
           <Route path="/user" element={<User/>}/>
           <Route path="/hotel" element={<Hotel/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/rooms" element={<Rooms/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/add" element={<New/>}/>

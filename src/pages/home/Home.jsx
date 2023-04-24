@@ -14,6 +14,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Addrooms from "../AddRooms/Addrooms";
 import BookedRooms from "../BookedRooms/BookedRooms";
 import New from "../new/New";
+import Profile from './../Profile/Profile';
 
 const Home = () => {
   const {icon} = useContext(AppContext)
@@ -48,6 +49,10 @@ const Home = () => {
             icon ==="addhotel"
             ?
             <New/>
+            :
+            icon==="profile"
+            ?
+            <Profile/>
             :
            <Dashboard/>
 
