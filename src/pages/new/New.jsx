@@ -51,6 +51,7 @@ const New = ({ inputs, title }) => {
           );
           const datas = await res.json();
           const { url } = datas;
+          
           return url;
           //  setFiles(datas.url)
         })
